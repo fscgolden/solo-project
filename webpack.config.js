@@ -37,6 +37,8 @@ module.exports = {
     })
   ],
   devServer: {
+    hot: false,
+    liveReload: false,
     static: {
       directory: path.resolve(__dirname, 'build'),
       publicPath: '/build'

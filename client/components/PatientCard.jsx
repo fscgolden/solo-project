@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 const PatientCard = (props) => {
 
-  let {_id, name, identifier, date, biopsy, discussed, findings, procedure } = props.info;
+  let {name, identifier, date, procedure, notes, biopsy, discussed } = props.info;
 
   biopsy ? biopsy = 'true' : biopsy = 'false';
   discussed ? discussed = 'true' : discussed = 'false';
@@ -11,13 +11,12 @@ const PatientCard = (props) => {
   return (
     <div>
       <ul>
-        <li>_id: {_id}</li>
         <li>Name: {name}</li>
         <li>Identifier: {identifier}</li>
         <li>Date: {date}</li>
         <li>Procedure: {procedure}</li>
+        <li>Notes: {notes}</li>
         <li>Biopsy: {biopsy}</li>
-        <li>Findings: {findings}</li>
         <li>Discussed: {discussed}</li>
       </ul>
     </div>

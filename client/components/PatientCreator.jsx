@@ -9,22 +9,41 @@ function PatientCreator() {
     const identifier = e.target.identifier.value;
     const date = e.target.date.value;
     const procedure = e.target.procedure.value;
+    const notes = e.target.notes.value;
     const biopsy = e.target.biopsy.value;
-    const findings = e.target.findings.value;
     const discussed = e.target.discussed.value;
-    let patientData = {name, identifier, date, procedure, biopsy, findings, discussed};
+    
+    const patientData = { name, identifier, date, procedure, notes, biopsy, discussed };
+    
     console.log('patient data: ', patientData);
+    alert('HEY GOT HERE');
+
+    fetch('/patients/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(patientData)
+    })
+      .then(resp => resp.json())
+      .then((data) => {
+        console.log('response from server: ', data);
+        
+        // send data to be display on page
+      })
+      .catch(err => console.log('PatientCreator fetch /patients/: ERROR: ', err));
+
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type='text' id='name'/>
-      <input type='text' id='identifier'/>
-      <input type='text' id='date'/>
-      <input type='text' id='procedure'/>
-      <input type='text' id='biopsy'/>
-      <input type='text' id='findings'/>
-      <input type='text' id='discussed'/>
+      <input type='text' id='name' placeholder='Name'/>
+      <input type='text' id='identifier' placeholder='Identifier'/>
+      <input type='text' id='date' placeholder='Date YYYY-MM-DD'/>
+      <input type='text' id='procedure' placeholder='Procedure'/>
+      <input type='text' id='notes' placeholder='Notes'/>
+      <input type='text' id='biopsy' placeholder='Biopsy? 0 or 1'/>
+      <input type='text' id='discussed' placeholder='Discussed? 0 or 1'/>
       <button type="submit">Submit</button>
     </form>
   );
