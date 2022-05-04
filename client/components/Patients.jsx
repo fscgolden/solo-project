@@ -10,6 +10,7 @@ class Patients extends Component {
       patients: []
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDiscussion = this.handleDiscussion.bind(this);
   }
 
   handleSubmit(e) {
@@ -47,6 +48,45 @@ class Patients extends Component {
       .catch(err => console.log('Patients fetch /patients/: ERROR: ', err));
   }
 
+  handleDiscussion(e, info) {
+    // console.log('event is: ', e);
+    // console.log('event.target is: ', e.target);
+    // console.log('event.target.value is: ', e.target.value);
+    console.log('info is: ', info);
+    const discussed = (e.target.value === 'true' ? true : false);
+    const patientData = {
+      ...info,
+      discussed
+    }
+    console.log('patientData is: ', patientData);
+
+    fetch('/patients/', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(patientData)
+    })
+      .then(resp => resp.json())
+      .then((data) => {
+        console.log('response from server after PATCH: ', data);
+        const prevPatients = this.state.patients;
+        const updatedPatients = prevPatients.map((el) => {
+          if (el.name === patientData.name && el.identifier === patientData.identifier) {
+            return data;
+          } else {
+            return el;
+          }
+        });
+        // send data to be display on page
+        return this.setState({
+          patients: updatedPatients
+        })
+      })
+      .catch(err => console.log('Patients patch /patients/: ERROR: ', err));
+
+  }
+
   componentDidMount() {
     fetch('/patients/')
       .then(res => res.json())
@@ -82,6 +122,7 @@ class Patients extends Component {
           <PatientCard
             info={el}
             status={'pending'}
+            handleDiscussion={this.handleDiscussion}
           />
         );
       })
@@ -91,6 +132,7 @@ class Patients extends Component {
           <PatientCard
             info={el}
             status={'resolved'}
+            handleDiscussion={this.handleDiscussion}
           />
         );
       })
