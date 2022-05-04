@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PatientCard from './PatientCard.jsx';
+import PatientCreator from './PatientCreator.jsx';
 
 
 class Patients extends Component {
@@ -8,8 +9,43 @@ class Patients extends Component {
     this.state = {
       patients: []
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const name = e.target.name.value;
+    const identifier = e.target.identifier.value;
+    const date = e.target.date.value;
+    const procedure = e.target.procedure.value;
+    const notes = e.target.notes.value;
+    const biopsy = e.target.biopsy.value;
+    const discussed = e.target.discussed.value;
+    
+    const patientData = { name, identifier, date, procedure, notes, biopsy, discussed };
+    
+    console.log('patient data: ', patientData);
+    alert('HEY GOT HERE');
+
+    fetch('/patients/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(patientData)
+    })
+      .then(resp => resp.json())
+      .then((data) => {
+        console.log('response from server: ', data);
+        
+        // send data to be display on page
+        return this.setState({
+          patients: [...this.state.patients, data]
+        })
+      })
+      .catch(err => console.log('Patients fetch /patients/: ERROR: ', err));
+  }
 
   componentDidMount() {
     fetch('/patients/')
@@ -31,7 +67,6 @@ class Patients extends Component {
     let newObj = patients[0];
     
     if (patients.length > 0) {
-
       const patientElems = patients.map((pat, index) => {
         return (
           <PatientCard
@@ -41,15 +76,20 @@ class Patients extends Component {
         );
       })
 
-
       return (
         <div className="patientsContainer">
+          <PatientCreator handleSubmit={this.handleSubmit}/>
           {patientElems}
         </div>
       );
-      
     }
-    
+    else {
+      return (
+        <div className="patientsContainer">
+          <PatientCreator handleSubmit={this.handleSubmit}/>
+        </div>
+      );
+    }
   }
 }
 

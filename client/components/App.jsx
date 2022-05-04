@@ -13,7 +13,7 @@ class App extends Component {
       <div>
         <p>Hello WorldDDD</p>
         <button id="reset">Reset board</button>
-        <PatientCreator />
+        {/* <PatientCreator /> */}
         <Patients />
       </div>
     );

@@ -18,9 +18,7 @@ patientsController.getPatients = (req, res, next) => {
 
 
 patientsController.createPatient = (req, res, next) => {
-  // const patientObj = req.body;
-  // req.body keys: id, name, identifier, date, procedure, biopsy, findings, discussed
-  // SQL COLUMNS: _id, name, identifier, date, procedure, biopsy, findings, discussed
+
   const { name, identifier, date, procedure, notes, biopsy, discussed } = req.body;
   const dataArr = [name, identifier, date, procedure, notes, biopsy, discussed]
 
