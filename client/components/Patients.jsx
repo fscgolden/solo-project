@@ -66,12 +66,31 @@ class Patients extends Component {
     console.log('patients[0] is this: ', patients[0]);
     let newObj = patients[0];
     
+    // Only render PatientCards if patients exist in database
     if (patients.length > 0) {
-      const patientElems = patients.map((pat, index) => {
+          
+      const pending = patients.filter((el) => {
+        return (el.biopsy && !el.discussed)
+      });
+
+      const resolved = patients.filter((el) => {
+        return (!el.biopsy || (el.biopsy && el.discussed))
+      });
+
+      const pendingPatients = pending.map((el) => {
         return (
           <PatientCard
-            key={index}
-            info={pat}
+            info={el}
+            status={'pending'}
+          />
+        );
+      })
+
+      const resolvedPatients = resolved.map((el) => {
+        return (
+          <PatientCard
+            info={el}
+            status={'resolved'}
           />
         );
       })
@@ -79,7 +98,10 @@ class Patients extends Component {
       return (
         <div className="patientsContainer">
           <PatientCreator handleSubmit={this.handleSubmit}/>
-          {patientElems}
+          <h2>Pending Patients</h2>
+            {pendingPatients}
+          <h2>Resolved Patients</h2>
+            {resolvedPatients}
         </div>
       );
     }

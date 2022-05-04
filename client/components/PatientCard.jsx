@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 const PatientCard = (props) => {
 
   let {name, identifier, date, procedure, notes, biopsy, discussed } = props.info;
+  let status = props.status;
 
   biopsy ? biopsy = 'true' : biopsy = 'false';
   discussed ? discussed = 'true' : discussed = 'false';
@@ -18,6 +19,7 @@ const PatientCard = (props) => {
         <li>Notes: {notes}</li>
         <li>Biopsy: {biopsy}</li>
         <li>Discussed: {discussed}</li>
+        <li>Status: {status}</li>
       </ul>
     </div>
   )
