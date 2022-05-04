@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import PatientCard from './PatientCard.jsx';
+import Patients from './Patients.jsx';
+import PatientCreator from './PatientCreator.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class App extends Component {
       <div>
         <p>Hello WorldDDD</p>
         <button id="reset">Reset board</button>
-        <PatientCard/>
+        <PatientCreator />
+        <Patients />
       </div>
     );
   }
