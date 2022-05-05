@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PatientCard from './PatientCard.jsx';
 import PatientCreator from './PatientCreator.jsx';
 import PatientLookup from './PatientLookup.jsx';
+import ResetPatients from './ResetPatients.jsx';
 
 
 class Patients extends Component {
@@ -13,6 +14,7 @@ class Patients extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDiscussion = this.handleDiscussion.bind(this);
     this.handleLookup = this.handleLookup.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleSubmit(e) {
@@ -109,6 +111,19 @@ class Patients extends Component {
     });
   }
 
+  handleReset(e) {
+    e.preventDefault();
+    
+    fetch('/patients/')
+    .then(res => res.json())
+    .then((patients) => {
+      return this.setState({
+        patients
+      });
+    })
+    .catch(err => console.log('Patients.handleReset: get patients: ERROR: ', err));
+  }
+
   componentDidMount() {
     fetch('/patients/')
       .then(res => res.json())
@@ -165,6 +180,10 @@ class Patients extends Component {
             </div>
           </div>
           
+          <div>
+            <ResetPatients handleReset={this.handleReset}/>
+          </div>
+
           <div className="pendingContainer">
             <h2>Pending Patients</h2>
             <div className="cardsHolder">
