@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
 import Patients from './Patients.jsx';
-import PatientCreator from './PatientCreator.jsx';
+import '../style.css';
 
 class App extends Component {
   constructor(props) {
@@ -11,9 +10,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <p>Hello WorldDDD</p>
-        <button id="reset">Reset board</button>
-        {/* <PatientCreator /> */}
         <Patients />
       </div>
     );

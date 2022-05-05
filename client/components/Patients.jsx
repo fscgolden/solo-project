@@ -15,7 +15,6 @@ class Patients extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
     const name = e.target.name.value;
     const identifier = e.target.identifier.value;
     const date = e.target.date.value;
@@ -26,9 +25,6 @@ class Patients extends Component {
     
     const patientData = { name, identifier, date, procedure, notes, biopsy, discussed };
     
-    console.log('patient data: ', patientData);
-    alert('HEY GOT HERE');
-
     fetch('/patients/', {
       method: 'POST',
       headers: {
@@ -38,7 +34,6 @@ class Patients extends Component {
     })
       .then(resp => resp.json())
       .then((data) => {
-        console.log('response from server: ', data);
         
         // send data to be display on page
         return this.setState({
@@ -49,16 +44,11 @@ class Patients extends Component {
   }
 
   handleDiscussion(e, info) {
-    // console.log('event is: ', e);
-    // console.log('event.target is: ', e.target);
-    // console.log('event.target.value is: ', e.target.value);
-    console.log('info is: ', info);
     const discussed = (e.target.value === 'true' ? true : false);
     const patientData = {
       ...info,
       discussed
     }
-    console.log('patientData is: ', patientData);
 
     fetch('/patients/', {
       method: 'PATCH',
@@ -69,7 +59,6 @@ class Patients extends Component {
     })
       .then(resp => resp.json())
       .then((data) => {
-        console.log('response from server after PATCH: ', data);
         const prevPatients = this.state.patients;
         const updatedPatients = prevPatients.map((el) => {
           if (el.name === patientData.name && el.identifier === patientData.identifier) {
@@ -100,15 +89,11 @@ class Patients extends Component {
 
   
   render() {
-
     const { patients } = this.state;
-    console.log('patients is this: ', patients);
-    console.log('patients[0] is this: ', patients[0]);
     let newObj = patients[0];
     
     // Only render PatientCards if patients exist in database
     if (patients.length > 0) {
-          
       const pending = patients.filter((el) => {
         return (el.biopsy && !el.discussed)
       });
@@ -140,10 +125,20 @@ class Patients extends Component {
       return (
         <div className="patientsContainer">
           <PatientCreator handleSubmit={this.handleSubmit}/>
-          <h2>Pending Patients</h2>
-            {pendingPatients}
-          <h2>Resolved Patients</h2>
-            {resolvedPatients}
+          
+          <div className="pendingContainer">
+            <h2 className="sectionHeader">Pending Patients</h2>
+            <div className="cardsHolder">
+              {pendingPatients}
+            </div>
+          </div>
+          
+          <div className="resolvedContainer">
+            <h2 className="sectionHeader">Resolved Patients</h2>
+            <div className="cardsHolder">
+              {resolvedPatients}
+            </div>
+          </div>
         </div>
       );
     }
