@@ -4,33 +4,78 @@ import React, { Component } from 'react';
 const PatientCard = (props) => {
   let {name, identifier, date, procedure, notes, biopsy, discussed } = props.info;
   let status = props.status;
+  let cleanDate = new Date(date.substring(0, 4), Number(date.substring(5, 7)) - 1, date.substring(8, 10)).toDateString();
 
   biopsy ? biopsy = 'true' : biopsy = 'false';
   discussed ? discussed = 'true' : discussed = 'false';
 
   return (
     <div className="patientCard">
-      <ul>
-        <li>Name: {name}</li>
-        <li>Identifier: {identifier}</li>
-        <li>Date: {date}</li>
-        <li>Procedure: {procedure}</li>
-        <li>Notes: {notes}</li>
-        <li>Biopsy: {biopsy}</li>
-        {/* <li>Discussed: {discussed}</li> */}
-        <li>Status: {status}</li>
-      </ul>
-
-      <label for="discussed">Discussed?:</label>
-      <select name="discussed" id="discussedDropDown" onChange={(e) => props.handleDiscussion(e, props.info)}>
-        <option value="" disabled selected hidden>{discussed}</option>
-        <option value="true">true</option>
-        <option value="false">false</option>
-      </select>
-
+      <table>
+        <tr>
+          <td>Name: </td>
+          <td>{name}</td>
+        </tr>
+        <tr>
+          <td>Identifier: </td>
+          <td>{identifier}</td>
+        </tr>
+        <tr>
+          <td>Date: </td>
+          <td>{cleanDate}</td>
+        </tr>
+        <tr>
+          <td>Procedure: </td>
+          <td>{procedure}</td>
+        </tr>
+        <tr>
+          <td>Notes: </td>
+          <td>{notes}</td>
+        </tr>
+        <tr>
+          <td>Biopsy: </td>
+          <td>{biopsy}</td>
+        </tr>
+        <tr>
+          <td>Status: </td>
+          <td>{status}</td>
+        </tr>
+        <tr>
+          <td>Discussed: </td>
+          <td>
+            <select name="discussed" id="discussedDropDown" onChange={(e) => props.handleDiscussion(e, props.info)}>
+              <option value="" disabled selected hidden>{discussed}</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </td>
+        </tr>
+      </table>
     </div>
   )
 }
 
-
 export default PatientCard;
+
+// return (
+//   <div className="patientCard">
+//     <ul>
+//       <li>Name: {name}</li>
+//       <li>Identifier: {identifier}</li>
+//       <li>Date: {date}</li>
+//       <li>Procedure: {procedure}</li>
+//       <li>Notes: {notes}</li>
+//       <li>Biopsy: {biopsy}</li>
+//       {/* <li>Discussed: {discussed}</li> */}
+//       <li>Status: {status}</li>
+//     </ul>
+
+//     <label for="discussed">Discussed?:</label>
+//     <select name="discussed" id="discussedDropDown" onChange={(e) => props.handleDiscussion(e, props.info)}>
+//       <option value="" disabled selected hidden>{discussed}</option>
+//       <option value="true">true</option>
+//       <option value="false">false</option>
+//     </select>
+
+//   </div>
+// )
