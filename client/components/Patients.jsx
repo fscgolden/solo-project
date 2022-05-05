@@ -77,8 +77,36 @@ class Patients extends Component {
       .catch(err => console.log('Patients patch /patients/: ERROR: ', err));
   }
 
-  handleLookup(e, info) {
+  handleLookup(e) {
+    e.preventDefault();
+    console.log('e.target is this: ', e.target);
+    console.log('e.target.procedure.value is this: ', e.target.procedure.value);
+    console.log('e.target.identifier.value is this: ', e.target.identifier.value === '');
+
+    const name = e.target.name.value;
+    const identifier = e.target.identifier.value;
+    const date = e.target.date.value;
+    const procedure = e.target.procedure.value;
+    const notes = e.target.notes.value;
+    const biopsy = e.target.biopsy.value;
+    const discussed = e.target.discussed.value;
     
+    const prevPatients = this.state.patients;
+    const filteredPatients = prevPatients.filter((el) => {
+      let match = true;
+      if (name !== '' && el.name !== name) match = false;
+      if (identifier !== '' && el.identifier !== identifier) match = false;
+      if (date !== '' && el.date !== date) match = false;
+      if (procedure !== '' && el.procedure !== procedure) match = false;
+      if (notes !== '' && el.notes !== notes) match = false;
+      if (biopsy !== '' && el.biopsy !== biopsy) match = false;
+      if (discussed !== '' && el.discussed !== discussed) match = false;
+      return match;
+    });
+    
+    return this.setState({
+      patients: filteredPatients
+    });
   }
 
   componentDidMount() {
@@ -131,7 +159,7 @@ class Patients extends Component {
         <div>
           <div id="formSection">
             <PatientCreator handleSubmit={this.handleSubmit}/>
-            <PatientLookup handleLookoup={this.handleLookup}/>
+            <PatientLookup handleLookup={this.handleLookup}/>
             <div id="picContainer">
               <img src="https://qtxasset.com/cdn-cgi/image/w=850,h=478,f=auto,fit=crop,g=0.5x0.5/https://qtxasset.com/quartz/qcloud5/media/image/GettyImages-1300505874%20%282%29.jpg?VersionId=_LaQiBzH53IwA3TdrgD._2kAnI3oKSRP"></img>
             </div>
