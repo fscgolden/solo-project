@@ -127,14 +127,14 @@ class Patients extends Component {
           <PatientCreator handleSubmit={this.handleSubmit}/>
           
           <div className="pendingContainer">
-            <h2 className="sectionHeader">Pending Patients</h2>
+            <h2>Pending Patients</h2>
             <div className="cardsHolder">
               {pendingPatients}
             </div>
           </div>
           
           <div className="resolvedContainer">
-            <h2 className="sectionHeader">Resolved Patients</h2>
+            <h2>Resolved Patients</h2>
             <div className="cardsHolder">
               {resolvedPatients}
             </div>

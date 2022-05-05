@@ -13,20 +13,33 @@ h1 {
   font-size: 23px;
 }
 
+h2 {
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 9px;
+  margin-top: 9px;
+}
+
 .patientCreator {
   padding: 20px;
+  padding-top: 5px;
+  padding-bottom: 10px;
   background-color: white;
   max-width: 400px;
-  height: 300px;
+  height: 350px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+}
+
+#formTitle {
+  color: rgb(56, 93, 141);
 }
 
 .patientForm {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  justify-content: space-around;
+  height: 85%;
+  justify-content: space-between;
 }
 
 form input {
@@ -41,15 +54,13 @@ form button {
   border-radius: 3px;
   color: white;
   border: none;
-  padding: 8px;
-  margin-top: 10px;
 }
 
 .pendingContainer {
   background-color: rgb(56, 93, 141);
   border: none;
-  padding-top: 1px;
-  padding-left: 15px;
+  padding-top: 4px;
+  padding-left: 20px;
   padding-bottom: 15px;
   border-radius: 5px;
   margin-top: 20px;
@@ -60,17 +71,13 @@ form button {
 .resolvedContainer {
   background-color: rgb(90, 134, 193);
   border: none;
-  padding-top: 1px;
-  padding-left: 15px;
+  padding-top: 4px;
+  padding-left: 20px;
   padding-bottom: 15px;
   border-radius: 5px;
   margin-top: 20px;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
   color: white;
-}
-
-.sectionHeader {
-  font-weight: 400;
 }
 
 .cardsHolder {
