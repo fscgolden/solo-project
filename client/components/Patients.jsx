@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PatientCard from './PatientCard.jsx';
 import PatientCreator from './PatientCreator.jsx';
+import PatientLookup from './PatientLookup.jsx';
 
 
 class Patients extends Component {
@@ -11,6 +12,7 @@ class Patients extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDiscussion = this.handleDiscussion.bind(this);
+    this.handleLookup = this.handleLookup.bind(this);
   }
 
   handleSubmit(e) {
@@ -73,7 +75,10 @@ class Patients extends Component {
         })
       })
       .catch(err => console.log('Patients patch /patients/: ERROR: ', err));
+  }
 
+  handleLookup(e, info) {
+    
   }
 
   componentDidMount() {
@@ -123,8 +128,14 @@ class Patients extends Component {
       })
 
       return (
-        <div className="patientsContainer">
-          <PatientCreator handleSubmit={this.handleSubmit}/>
+        <div>
+          <div id="formSection">
+            <PatientCreator handleSubmit={this.handleSubmit}/>
+            <PatientLookup handleLookoup={this.handleLookup}/>
+            <div id="picContainer">
+              <img src="https://qtxasset.com/cdn-cgi/image/w=850,h=478,f=auto,fit=crop,g=0.5x0.5/https://qtxasset.com/quartz/qcloud5/media/image/GettyImages-1300505874%20%282%29.jpg?VersionId=_LaQiBzH53IwA3TdrgD._2kAnI3oKSRP"></img>
+            </div>
+          </div>
           
           <div className="pendingContainer">
             <h2>Pending Patients</h2>
