@@ -5,7 +5,7 @@ function PatientCreator(props) {
   return (
     <div className="formHolder">
       <h2 className="formTitle">New Patient Form</h2>
-      <form onSubmit={props.handleSubmit} className="patientForm">
+      <form onSubmit={props.handleSubmit} className="patientForm" id="createForm">
         <input type='text' id='name' placeholder='Name'/>
         <input type='text' id='identifier' placeholder='Identifier'/>
         <input type='text' id='date' placeholder='Date YYYY-MM-DD'/>

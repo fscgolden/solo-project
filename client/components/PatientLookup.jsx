@@ -5,7 +5,7 @@ function PatientLookup(props) {
   return (
     <div className="formHolder">
       <h2 className="formTitle">Patient Lookup Form</h2>
-      <form onSubmit={props.handleLookup} className="patientForm">
+      <form onSubmit={props.handleLookup} className="patientForm" id="lookupForm">
         <input type='text' id='name' placeholder='Name'/>
         <input type='text' id='identifier' placeholder='Identifier'/>
         <input type='text' id='date' placeholder='Date YYYY-MM-DD'/>

@@ -40,6 +40,7 @@ class Patients extends Component {
       .then(resp => resp.json())
       .then((data) => {
         
+        document.getElementById("createForm").reset();
         // send data to be display on page
         return this.setState({
           patients: [...this.state.patients, data]
@@ -107,6 +108,7 @@ class Patients extends Component {
       return match;
     });
     
+    document.getElementById("lookupForm").reset();
     return this.setState({
       patients: filteredPatients
     });
