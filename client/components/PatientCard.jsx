@@ -51,6 +51,7 @@ const PatientCard = (props) => {
           </td>
         </tr>
       </table>
+      <button id="deleteButton" onClick={(e) => props.handleDelete(e, props.info)}>Delete Record</button>
     </div>
   )
 }

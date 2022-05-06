@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 function PatientLookup(props) {
   return (
     <div className="formHolder">
-      <h2>Patient Lookup Form</h2>
+      <h2 className="formTitle">Patient Lookup Form</h2>
       <form onSubmit={props.handleLookup} className="patientForm">
         <input type='text' id='name' placeholder='Name'/>
         <input type='text' id='identifier' placeholder='Identifier'/>

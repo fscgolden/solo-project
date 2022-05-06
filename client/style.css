@@ -11,6 +11,7 @@ h1 {
   border-radius: 5px;
   color: white;
   font-size: 23px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
 
 h2 {
@@ -50,7 +51,7 @@ img {
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
 
-#formTitle {
+.formTitle {
   color: rgb(56, 93, 141);
 }
 
@@ -67,12 +68,19 @@ form input {
   border-radius: 5px;
 }
 
-form button {
-  width: 40%;
+#resetHolder {
+  margin-top: 20px;
+}
+
+#resetButton {
   background-color: #192E47;
-  border-radius: 3px;
   color: white;
-  border: none;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  height: 25px;
+  width: 200px;
+  height: 30px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
 
 .pendingContainer {
@@ -115,8 +123,16 @@ form button {
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
   color: black;
   width: 325px;
+  position: relative;
 }
 
 table td {
-  padding-right: 15px;
+  padding-right: 20px;
+}
+
+#deleteButton {
+  float: right;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
 }

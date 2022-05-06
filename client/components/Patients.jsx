@@ -15,6 +15,7 @@ class Patients extends Component {
     this.handleDiscussion = this.handleDiscussion.bind(this);
     this.handleLookup = this.handleLookup.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleSubmit(e) {
@@ -113,7 +114,7 @@ class Patients extends Component {
 
   handleReset(e) {
     e.preventDefault();
-    
+
     fetch('/patients/')
     .then(res => res.json())
     .then((patients) => {
@@ -122,6 +123,35 @@ class Patients extends Component {
       });
     })
     .catch(err => console.log('Patients.handleReset: get patients: ERROR: ', err));
+  }
+
+  handleDelete(e, info) {
+    const patientData = {...info}
+    console.log('patientData is: ', patientData);
+
+    fetch('/patients/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(patientData)
+    })
+      .then(resp => resp.json())
+      .then((data) => {
+        const prevPatients = this.state.patients;
+        const updatedPatients = prevPatients.filter((el) => {
+          if (el.name === patientData.name && el.identifier === patientData.identifier) {
+            return false;
+          } else {
+            return true;
+          }
+        });
+        // send data to be display on page
+        return this.setState({
+          patients: updatedPatients
+        })
+      })
+      .catch(err => console.log('Patients delete /patients/: ERROR: ', err));
   }
 
   componentDidMount() {
@@ -156,6 +186,7 @@ class Patients extends Component {
             info={el}
             status={'pending'}
             handleDiscussion={this.handleDiscussion}
+            handleDelete={this.handleDelete}
           />
         );
       })
@@ -166,6 +197,7 @@ class Patients extends Component {
             info={el}
             status={'resolved'}
             handleDiscussion={this.handleDiscussion}
+            handleDelete={this.handleDelete}
           />
         );
       })
@@ -180,7 +212,7 @@ class Patients extends Component {
             </div>
           </div>
           
-          <div>
+          <div id="resetHolder">
             <ResetPatients handleReset={this.handleReset}/>
           </div>
 

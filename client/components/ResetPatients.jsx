@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 function ResetPatients(props) {
   return (
-    <button onClick={props.handleReset}>View All Patients</button>
+    <button id="resetButton" onClick={props.handleReset}>View All Patients</button>
   );
 }
 
